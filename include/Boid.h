@@ -14,18 +14,27 @@
 #ifndef BOID_H
 #define BOID_H
 #include <string>
+#include <iostream>
+#include <gtkmm.h>
+#include "MurmurStruct.h"
 
 class Boid{
 public:
-    Boid();
+//    Boid();
+    Boid( std::string id);
     Boid(const Boid& orig);
-    virtual ~Boid();
-    void SetTest(std::string test);
-    std::string GetTest() const;
+    Boid(const Boid&& orig);
+    Boid& operator=(const Boid& right) ;
 
+    virtual ~Boid();
+    void initialize();
+    void swim();
+    void setMax(Gtk::Allocation& allocation);
+    std::string GetId() const;
     
 private:
-     std::string test;
+     std::string Id;
+     MurmurVector max;
 };
 
 #endif /* BOID_H */

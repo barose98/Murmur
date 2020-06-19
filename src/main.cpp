@@ -1,5 +1,6 @@
 #include <iostream>
 #include <sstream>
+#include <sstream>
 #include <gtkmm.h>
 
 #include "MurmurDrawingArea.h"
@@ -11,7 +12,8 @@
    std::cin>>entered_boids;
     std::cout <<  std::endl;
   std::cout <<  entered_boids<<" boids"  <<std::endl;
-  
+   std::stringstream ss(entered_boids);
+   ss>>num_boids;
     Glib::RefPtr<Gtk::Application> app = Gtk::Application::create(argc, argv, "org.gtkmm.murmur");
     Glib::RefPtr<Gtk::Builder>  refBuilder = Gtk::Builder::create();
 
@@ -27,7 +29,7 @@
     refBuilder->get_widget("murmur-window", main_window);
     if(main_window){
          std::cout << "Starting..."  <<std::endl;
-         drawing_area.initialize();
+         drawing_area.initialize(num_boids);
          main_window->add(drawing_area);
          app->run(*main_window);
     }
